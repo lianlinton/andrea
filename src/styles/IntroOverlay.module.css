@@ -1,0 +1,190 @@
+.skipButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--purple-deep);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(184, 169, 201, 0.4);
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s;
+}
+
+.skipButton:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: linear-gradient(180deg, #f5effa 0%, #ebe0f5 50%, #f0dce8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease;
+}
+
+.overlay.fadeOut {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.skipButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--purple-deep);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(184, 169, 201, 0.4);
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s;
+}
+
+.skipButton:hover {
+  background: #fff;
+}
+
+.skipButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--purple-deep);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(184, 169, 201, 0.4);
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s;
+}
+
+.skipButton:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.skipButton {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--purple-deep);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(184, 169, 201, 0.4);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.skipButton:hover {
+  background: #fff;
+}
+
+.skipButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--purple-deep);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(184, 169, 201, 0.4);
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s;
+}
+
+.skipButton:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.content {
+  text-align: center;
+  padding: 2rem;
+}
+
+.introText {
+  font-family: var(--font-script);
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 600;
+  color: var(--purple-deep);
+  margin: 0;
+  animation: fadeIn 0.8s ease, gentleFloat 2s ease-in-out 0.5s infinite;
+}
+
+.countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.countdownIn {
+  font-family: var(--font-script);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--purple-muted);
+  animation: fadeIn 0.4s ease;
+}
+
+.countdownNumber {
+  font-family: var(--font-script);
+  font-size: clamp(3rem, 12vw, 5rem);
+  font-weight: 700;
+  color: var(--purple-deep);
+  animation: popIn 0.5s ease;
+}
+
+.confettiMessage {
+  animation: fadeIn 0.4s ease;
+}
+
+.celebration {
+  font-size: 4rem;
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
