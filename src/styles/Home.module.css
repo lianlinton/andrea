@@ -271,22 +271,118 @@
 
 /* ===== BIRTHDAY MESSAGES ===== */
 
+/* Messages section – at bottom, low key */
 .messagesSection {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
 }
 
 .messagesHeading {
-  font-family: var(--font-script);
-  font-size: 1.75rem;
+  font-family: var(--font-sans);
+  font-size: 1rem;
   font-weight: 600;
-  color: var(--purple-deep);
+  color: var(--purple-muted);
   text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+/* Password gate – compact, inconspicuous */
+.messagesLockWrap {
+  max-width: 280px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  background: rgba(253, 249, 252, 0.8);
+  border-radius: 12px;
+  border: 1px solid rgba(212, 196, 232, 0.25);
+}
+
+.messagesLockText {
+  font-size: 0.8rem;
+  color: var(--purple-muted);
+  text-align: center;
+  margin: 0 0 0.5rem;
+  line-height: 1.35;
+}
+
+.messagesLockForm {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.messagesLockInput {
+  flex: 1;
+  min-width: 100px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+  border: 1px solid rgba(212, 196, 232, 0.4);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--purple-deep);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.messagesLockInput:focus {
+  border-color: rgba(184, 169, 201, 0.6);
+}
+
+.messagesLockShowBtn {
+  padding: 0.35rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--purple-muted);
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.messagesLockShowBtn:hover {
+  color: var(--purple-deep);
+  text-decoration: underline;
+}
+
+.messagesLockBtn {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(175deg, var(--purple-deep) 0%, #5a4d6b 100%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.messagesLockBtn:hover {
+  opacity: 0.95;
+}
+
+.messagesLockError {
+  font-size: 0.75rem;
+  color: #c44;
+  text-align: center;
+  margin: 0.4rem 0 0;
+}
+
+/* Masonry layout for message bubbles (from sheet) */
+.messagesMasonry {
+  column-count: 3;
+  column-gap: 1.25rem;
+}
+
+.messagesMasonry > * {
+  break-inside: avoid;
   margin-bottom: 1.25rem;
 }
 
-.messagesMasonry {
-  display: flex;
-  margin-left: -0.75rem;
+@media (max-width: 768px) {
+  .messagesMasonry {
+    column-count: 2;
+  }
 }
 
 .messagesMasonryColumn {
@@ -921,6 +1017,14 @@
 .navLink svg {
   color: var(--purple-soft);
   transition: transform 0.2s ease;
+}
+
+.navLinkLarge {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.85rem 1.6rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(107, 91, 122, 0.12);
 }
 
 /* ===== RESPONSIVE ===== */

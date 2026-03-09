@@ -1,28 +1,73 @@
+"use client";
+
 import Head from "next/head";
 import Link from "next/link";
-import { ArrowLeft, MessageCircle, Heart } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowLeft, MessageCircle } from "lucide-react";
 import FlowerBrix from "@/components/FlowerBrix";
 import styles from "@/styles/Messages.module.css";
+import homeStyles from "@/styles/Home.module.css";
 
-/* Add submissions from your Google Form here */
-const FAVORITE_MEMORIES = [
-  { memory: "That time we stayed up until 3am talking about everything and nothing. I'll never forget how hard we laughed.", author: "A friend" },
-  { memory: "The road trip when you made us pull over three times for snacks. Best day ever.", author: "Road trip crew" },
+type Message = { text: string; author: string };
+
+const FALLBACK_MESSAGES: Message[] = [
+  { text: "Ur goated fam", author: "Samuel Puthiakunnel" },
+  { text: "Happy Birthday Andrea! Hope you have an amazing day today with loved ones and friends!", author: "Anand George" },
+  { text: "Happy birthday Andrea", author: "Ryan" },
+  { text: "HAPPY BIRTHDAY ANDREA REJI AR ASAP ROCKY!! you're the most mysterious person i know.", author: "Maria George" },
+  { text: "Happy 20th birthday! Wishing you all the best!", author: "Aaron" },
+  { text: "Happy Birthday!! Congrats on turning 20! Make your 20s the best!", author: "Ankita" },
+  { text: "Happy birthday", author: "Jerom" },
+  { text: "Happy birthday Andrea! You are one of the kindest people I know!", author: "Mathew Chandy" },
+  { text: "I love you my princess! You have pulled me out of so many dark times.", author: "Ashley Joshi" },
+  { text: "happiest birthday andrea! here's to 20!", author: "Jovita" },
+  { text: "Hii Andrea, happy birthday! You are such a joy to be around.", author: "Meryl" },
+  { text: "ammuu kuttaaaa, I wish you the bestest birthday ever!!!", author: 'Neha <3 ("chechi" from Zion)' },
 ];
 
-const BIRTHDAY_MESSAGES = [
-  { text: "Happy 20th, Andrea! We're so grateful for you and everything you bring to our lives. Here's to many more memories together.", author: "All of us" },
-  { text: "You light up every room you walk into. We hope your day is as amazing as you are!", author: "With love" },
-  { text: "Twenty years of you and we couldn't be happier. We love you so much.", author: "xoxo" },
-];
+const MESSAGES_PASSWORD = "andrea";
+const MESSAGES_UNLOCK_KEY = "andrea-messages-unlocked";
 
 export default function MessagesPage() {
+  const [messages, setMessages] = useState<Message[]>(FALLBACK_MESSAGES);
+  const [unlocked, setUnlocked] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/sheet")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.messages?.length) setMessages(data.messages);
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setUnlocked(sessionStorage.getItem(MESSAGES_UNLOCK_KEY) === "1");
+    }
+  }, []);
+
+  const unlock = () => {
+    if (passwordInput.trim() === MESSAGES_PASSWORD) {
+      setUnlocked(true);
+      setPasswordError("");
+      setPasswordInput("");
+      if (typeof window !== "undefined") sessionStorage.setItem(MESSAGES_UNLOCK_KEY, "1");
+    } else {
+      setPasswordError("Wrong password. Try again!");
+    }
+  };
+
   return (
     <>
       <Head>
         <title>Messages for Andrea – Andrea&apos;s 20th Birthday</title>
-        <meta name="description" content="Favorite memories and birthday messages for Andrea" />
+        <meta name="description" content="Birthday messages for Andrea, from everyone who loves her." />
       </Head>
+
       <div className={styles.page}>
         <main className={styles.main}>
           <Link href="/" className={styles.backLink}>
@@ -36,49 +81,69 @@ export default function MessagesPage() {
               <FlowerBrix size={48} variant="purple" />
               <FlowerBrix size={36} variant="lavender" />
             </div>
-            <h1 className={styles.title}>Messages for you</h1>
+            <h1 className={styles.title}>Messages for Andrea</h1>
             <p className={styles.subtitle}>From all of us who love you</p>
           </header>
 
-          {/* Favorite memory with Andrea */}
-          <section className={styles.section} aria-label="Favorite memory with Andrea">
-            <h2 className={styles.sectionTitle}>
-              <Heart className={styles.sectionTitleIcon} size={28} />
-              Favorite memory with Andrea
-            </h2>
-            <div className={styles.notesScatter}>
-              {FAVORITE_MEMORIES.map((item, i) => (
-                <article key={i} className={styles.foldedNote}>
-                  <div className={styles.foldedNoteContent}>
-                    <p>&ldquo;{item.memory}&rdquo;</p>
-                    <span className={styles.foldedNoteAuthor}>— {item.author}</span>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
+          {!unlocked ? (
+            <section aria-label="Unlock messages">
+              <div className={homeStyles.messagesLockWrap}>
+                <p className={homeStyles.messagesLockText}>Password to view messages</p>
+                <div className={homeStyles.messagesLockForm}>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    className={homeStyles.messagesLockInput}
+                    placeholder="Password"
+                    value={passwordInput}
+                    onChange={(e) => {
+                      setPasswordInput(e.target.value);
+                      setPasswordError("");
+                    }}
+                    onKeyDown={(e) => e.key === "Enter" && unlock()}
+                    autoComplete="current-password"
+                  />
+                  <button
+                    type="button"
+                    className={homeStyles.messagesLockShowBtn}
+                    onClick={() => setShowPassword((s) => !s)}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    title={showPassword ? "Hide" : "Show"}
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </button>
+                  <button type="button" className={homeStyles.messagesLockBtn} onClick={unlock}>
+                    Unlock
+                  </button>
+                </div>
+                {passwordError && (
+                  <p className={homeStyles.messagesLockError} role="alert">
+                    {passwordError}
+                  </p>
+                )}
+              </div>
+            </section>
+          ) : (
+            <section className={styles.section} aria-label="Birthday messages">
+              <h2 className={styles.sectionTitle}>
+                <MessageCircle className={styles.sectionTitleIcon} size={28} />
+                Birthday messages
+              </h2>
 
-          <div className={styles.floralBorder} aria-hidden />
-
-          {/* Birthday messages to Andrea */}
-          <section className={styles.section} aria-label="Birthday messages to Andrea">
-            <h2 className={styles.sectionTitle}>
-              <MessageCircle className={styles.sectionTitleIcon} size={28} />
-              Birthday messages to Andrea
-            </h2>
-            <div className={styles.notesScatter}>
-              {BIRTHDAY_MESSAGES.map((msg, i) => (
-                <article key={i} className={styles.foldedNote}>
-                  <div className={styles.foldedNoteContent}>
-                    <p>&ldquo;{msg.text}&rdquo;</p>
-                    <span className={styles.foldedNoteAuthor}>— {msg.author}</span>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
+              <div className={styles.notesGrid}>
+                {messages.map((msg, i) => (
+                  <article key={i} className={styles.foldedNote}>
+                    <div className={styles.foldedNoteContent}>
+                      <p>&ldquo;{msg.text}&rdquo;</p>
+                      <span className={styles.foldedNoteAuthor}>— {msg.author}</span>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          )}
         </main>
       </div>
     </>
   );
 }
+

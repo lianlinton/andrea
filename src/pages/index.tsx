@@ -3,7 +3,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useState, useEffect, useMemo } from "react";
-import { Camera, MessageCircle, Video } from "lucide-react";
+import { MessageCircle, Video } from "lucide-react";
 import IntroOverlay from "@/components/IntroOverlay";
 import { ANDREA_HERO, GRID_PHOTOS, CAROUSEL_PHOTOS, POLAROID_PHOTOS, GALLERY_VIDEOS, type PhotoItem } from "@/data/media";
 import styles from "@/styles/Home.module.css";
@@ -193,7 +193,7 @@ export default function Home() {
                 <div className={galleryStyles.carouselOverlay}>
                   <div className={galleryStyles.heroTextBlock}>
                     <h1 className={galleryStyles.heroTitle}>Happy 20th Birthday Andrea!</h1>
-                    <p className={galleryStyles.heroSubtitle}>we love you so much </p>
+                    <p className={galleryStyles.heroSubtitle}>We love you so much :) </p>
                   </div>
                 </div>
               </div>
@@ -203,9 +203,9 @@ export default function Home() {
           <div className={galleryStyles.sectionDivider} aria-hidden />
 
           <section className={styles.andreaSaidSection} aria-label="Things Andrea said">
-            <h2 className={styles.andreaSaidTitle}>things andrea said</h2>
+            <h2 className={styles.andreaSaidTitle}>Andrea Quotes</h2>
             <p className={styles.andreaSaidSubtitle}>
-              A collection of wisdom, chaos &amp; one-liners from the legend herself
+              One-liners from the legend herself.
             </p>
 
             {quotes.length > 0 && (
@@ -251,9 +251,9 @@ export default function Home() {
           <div className={galleryStyles.sectionDivider} aria-hidden />
 
           <section className={styles.chartsSection} aria-label="Survey results">
-            <h2 className={styles.chartsHeading}>adulthood andrea</h2>
+            <h2 className={styles.chartsHeading}>Adulthood Andrea</h2>
             <p className={styles.chartsIntro}>
-              What her friends voted she should keep &amp; what to leave in the rearview
+              What we voted she should keep &amp; what to leave in the rearview
             </p>
 
             <div className={galleryStyles.galleryFullBleed}>
@@ -296,7 +296,7 @@ export default function Home() {
               <div className={styles.chartBlock}>
                 <h3 className={styles.chartLabel}>INs</h3>
                 <p className={styles.chartSubtitle}>
-                  One Andrea trait that must survive adulthood
+                  One Andrea trait that MUST survive adulthood
                 </p>
 
                 <div
@@ -411,7 +411,7 @@ export default function Home() {
               <div className={styles.chartBlock}>
                 <h3 className={styles.chartLabel}>OUTs</h3>
                 <p className={styles.chartSubtitle}>
-                  One Andrea habit that adulthood should retire
+                  One Andrea habit that adulthood SHOULD retire
                 </p>
 
                 <div
@@ -535,8 +535,8 @@ export default function Home() {
           <div className={galleryStyles.sectionDivider} aria-hidden />
 
           <section className={galleryStyles.section} aria-label="Polaroid memories">
-            <h2 className={galleryStyles.sectionLabel}>Favorite Andrea Moments</h2>
-            <p className={galleryStyles.sectionSubtext}>Polaroid Memories </p>
+            <h2 className={galleryStyles.sectionLabel}>Polaroids with Andrea</h2>
+            <p className={galleryStyles.sectionSubtext}>Iconic Andrea Moments </p>
             <div className={galleryStyles.galleryFullBleed}>
             <div className={galleryStyles.polaroidMasonry}>
               {POLAROID_PHOTOS.map((item, i) => (
@@ -566,9 +566,18 @@ export default function Home() {
 
           <div className={galleryStyles.sectionDivider} aria-hidden />
 
+          <nav className={styles.navLinks}>
+            <Link href="/messages" className={`${styles.navLink} ${styles.navLinkLarge}`}>
+              <MessageCircle size={24} />
+              Messages
+            </Link>
+          </nav>
+
+          <div className={galleryStyles.sectionDivider} aria-hidden />
+
           <section className={galleryStyles.section} aria-label="Favorites">
-            <h2 className={galleryStyles.sectionLabel}>Andrea Special's</h2>
-            <p className={galleryStyles.sectionSubtext}>More special moments</p>
+            <h2 className={galleryStyles.sectionLabel}>Andrea Gallery Specials</h2>
+            <p className={galleryStyles.sectionSubtext}>Crowd-favorite memories with you.</p>
   
             <div className={galleryStyles.galleryFullBleed}>
             <div className={galleryStyles.masonryGallery}>
@@ -608,6 +617,8 @@ export default function Home() {
             </div>
           </section>
 
+          <div className={galleryStyles.sectionDivider} aria-hidden />
+
           {/* {GALLERY_VIDEOS.length > 0 && (
             <>
               <div className={galleryStyles.sectionDivider} aria-hidden />
@@ -634,17 +645,6 @@ export default function Home() {
               </section>
             </>
           )} */}
-
-          {/* <nav className={styles.navLinks}>
-            <Link href="/gallery" className={styles.navLink}>
-              <Camera size={20} />
-              Photos &amp; videos
-            </Link>
-            <Link href="/messages" className={styles.navLink}>
-              <MessageCircle size={20} />
-              More messages
-            </Link>
-          </nav> */}
         </main>
       </div>
     </>
